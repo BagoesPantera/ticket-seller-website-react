@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 
-const Navbar = () => {
+const Navbar = (props) => {
 
     const [isMobile, setIsMobile] = useState(false)
+
+    const {handleLogout} = props;
 
     return (
         <div className="flex justify-center items-center bg-red-600">
@@ -53,12 +55,7 @@ const Navbar = () => {
                                     Notifikasi
                             </div>
                             </NavLink>
-                            <NavLink to="/login" className="inline-flex items-center lg:flex-row-reverse px-4 py-3 lg:py-2 lg:px-4 text-red-200 hover:text-white lg:text-white lg:focus:ring-2 lg:ring-red-100 lg:bg-red-500 rounded-md ">
-                                <svg className="w-6 h-6 mr-1 lg:w-5 lg:h-5 lg:mr-0 lg:ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path>
-                                </svg>
-                                Login
-                            </NavLink>
+                            <button onClick={handleLogout}>Logout</button>
                         </div>
                     </div>
                 </div>

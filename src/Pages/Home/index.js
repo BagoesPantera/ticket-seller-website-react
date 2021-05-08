@@ -1,11 +1,20 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { Logo } from '../../assets'
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
 
 
 
 
-const Home = () => {
+const Home = (props) => {
+
+    //Restrict the page
+    const {user} = props
+    if(!user){
+        return <Redirect to="/login"></Redirect>
+    }
+
+
     return (
         <div className="flex flex-col justify-center items-center min-h-screen bg-gray-100">
             <div className="w-full ">

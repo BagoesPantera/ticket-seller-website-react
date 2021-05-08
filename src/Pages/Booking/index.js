@@ -1,6 +1,12 @@
 import React from 'react'
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
 
-const Booking = () => {
+const Booking = (props) => {
+    //Restrict the page
+    const {user} = props
+    if(!user){
+        return <Redirect to="/login"></Redirect>
+    }
     return (
         <div className="flex bg-gray-100 min-h-screen justify-center ">
             <div className="flex flex-col w-full items-center">
