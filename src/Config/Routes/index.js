@@ -12,6 +12,7 @@ const Routes = () => {
     const [username, setUname] =useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmpass, setConfirmpass] = useState('');
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
     const [hasAccount, setHasAccount] = useState(false);
@@ -47,6 +48,13 @@ const Routes = () => {
                     break;
             }
         })
+    }
+    const handleconfirmPassword = () =>{
+        if(password == confirmpass){
+            handleRegister();
+        }else{
+            setPasswordError('PASSWORD DOESNT MATCH')
+        }
     }
     const handleRegister = () => {
       fire
@@ -121,7 +129,7 @@ const Routes = () => {
                     <Login user={user} email={email} setEmail={setEmail} password={password} setPassword={setPassword} handleLogin={handleLogin} hasAccount={hasAccount} setHasAccount={setHasAccount} emailError={emailError} passwordError={passwordError} />
                 </Route>
                 <Route exact path="/daftar">
-                    <Register email={email} setEmail={setEmail} username={username} setUname={setUname} password={password} setPassword={setPassword} user={user} setUser={setUser}  handleRegister={handleRegister} submitUser={submitUser} hasAccount={hasAccount} setHasAccount={setHasAccount} emailError={emailError} passwordError={passwordError}/>
+                    <Register email={email} setEmail={setEmail} username={username} setUname={setUname} password={password} setPassword={setPassword} user={user} setUser={setUser}  handleRegister={handleRegister} submitUser={submitUser} hasAccount={hasAccount} setHasAccount={setHasAccount} emailError={emailError} passwordError={passwordError} handleconfirmPassword={handleconfirmPassword} confirmpass={confirmpass} setConfirmpass={setConfirmpass}/>
                 </Route>
                 <Route exact path="/booking">
                     <Booking user={user} />

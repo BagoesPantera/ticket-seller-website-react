@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-d
 const Register = (props) => {
 
     //Getting props from routes
-    const {email, setEmail, username, setUname, password, setPassword, user, setUser,handleRegister,submitUser, hasAccount, setHasAccount, emailError, passwordError} = props;
+    const {email, setEmail, username, setUname, password, setPassword, user, setUser,handleRegister,submitUser, hasAccount, setHasAccount, emailError, passwordError, handleconfirmPassword, confirmpass, setConfirmpass} = props;
 
     //Restrict the page
     if(user){
@@ -41,12 +41,12 @@ const Register = (props) => {
                                 </div>
                                 <div className="mb-5 lg:w-5/12">
                                     <label htmlFor="password" className="block mb-2 text-sm font-semibold text-gray-500">Konfirmasi kata sandi</label>
-                                    <input className="bg-white text-sm font-semibold text-gray-400 focus:text-black hover:bg-gray-100 w-full border shadow-sm focus:border-red-500 focus:bg-white focus:ring focus:ring-red-100 transition duration-200 rounded-md h-10 focus:outline-none px-3" type="password" placeholder="konfirmasi kata sandi" />
+                                    <input className="bg-white text-sm font-semibold text-gray-400 focus:text-black hover:bg-gray-100 w-full border shadow-sm focus:border-red-500 focus:bg-white focus:ring focus:ring-red-100 transition duration-200 rounded-md h-10 focus:outline-none px-3" type="password" placeholder="konfirmasi kata sandi" required value={confirmpass} onChange={(e)=>setConfirmpass(e.target.value)}/>
                                 </div>
                             </div>
                         </form>
                         <div className="flex justify-center mt-4">
-                            <button className="w-full px-4 py-2 font-semibold bg-gradient-to-tr from-rose-600 to-red-500 text-white rounded-md focus:outline-none border focus:border-red-300 focus:ring focus:ring-red-100" onClick={handleRegister}>
+                            <button className="w-full px-4 py-2 font-semibold bg-gradient-to-tr from-rose-600 to-red-500 text-white rounded-md focus:outline-none border focus:border-red-300 focus:ring focus:ring-red-100" onClick={handleconfirmPassword}>
                                 DAFTAR
                             </button>
                         </div>
