@@ -13,29 +13,33 @@ const Routes = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmpass, setConfirmpass] = useState('');
+    const [rememberMe, setRM] = useState(false);
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
     const [hasAccount, setHasAccount] = useState(false);
   
     const clearInputs = () => {
-      setEmail('');
-      setPassword('');
+        setUname('');
+        setEmail('');
+        setPassword('');
+        setConfirmpass('');
     }
     const clearErrors = () => {
       setEmailError('');
       setPasswordError('');
     }
     const handleLogin = () => {
-        fire
-        .auth()
-        .signInWithEmailAndPassword(email, password)
-        .then((user) => {
-            if (user) {
-                <Redirect to="/"></Redirect>
-            } else {
-              
-            }
-          })
+        firebase.auth().setPersistence(rememberMe ? firebase.auth.Auth.Persistence.LOCAL : firebase.auth.Auth.Persistence.SESSION)
+        .then(() => {
+            return firebase.auth().signInWithEmailAndPassword(email, password)
+            .then((user) => {
+                if (user) {
+                    <Redirect to="/"></Redirect>
+                } else {
+                  
+                }
+              });
+        })
         .catch(err => {
             switch(err.code){
                 case "auth/invalid-email":
@@ -96,6 +100,7 @@ const Routes = () => {
       fire.auth().onAuthStateChanged((user) => {
         if(user) {
           clearInputs();
+          clearErrors();
           setUser(user);
         }else{
           setUser('');
@@ -126,7 +131,7 @@ const Routes = () => {
                     <Schedule />
                 </Route>
                 <Route exact path="/login">
-                    <Login user={user} email={email} setEmail={setEmail} password={password} setPassword={setPassword} handleLogin={handleLogin} hasAccount={hasAccount} setHasAccount={setHasAccount} emailError={emailError} passwordError={passwordError} />
+                    <Login user={user} email={email} setEmail={setEmail} password={password} setPassword={setPassword} rememberMe={rememberMe} setRM={setRM} handleLogin={handleLogin} hasAccount={hasAccount} setHasAccount={setHasAccount} emailError={emailError} passwordError={passwordError} />
                 </Route>
                 <Route exact path="/daftar">
                     <Register email={email} setEmail={setEmail} username={username} setUname={setUname} password={password} setPassword={setPassword} user={user} setUser={setUser}  handleRegister={handleRegister} submitUser={submitUser} hasAccount={hasAccount} setHasAccount={setHasAccount} emailError={emailError} passwordError={passwordError} handleconfirmPassword={handleconfirmPassword} confirmpass={confirmpass} setConfirmpass={setConfirmpass}/>

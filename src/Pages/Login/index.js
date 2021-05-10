@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-d
 const Login = (props) => {
 
     //Getting the props from routes
-    const {user, email, setEmail, password, setPassword, handleLogin, hasAccount, setHasAccount, emailError, passwordError} = props;
+    const {user, email, setEmail, password, setPassword, rememberMe, setRM, handleLogin, hasAccount, setHasAccount, emailError, passwordError} = props;
 
     //Restrict the page
     if(user){
@@ -35,7 +35,7 @@ const Login = (props) => {
                                 <p>{passwordError}</p>
                             </div>
                             <div className="flex flex-row items-center mx-1">
-                                <input className="mr-4" type="checkbox"/>
+                                <input className="mr-4" type="checkbox" onChange={(e) => setRM(e.target.checked)}/>
                                 <label htmlFor="checkbox" className="block text-sm font-semibold text-gray-500">Ingat saya</label>
                             </div>
                         </form>
