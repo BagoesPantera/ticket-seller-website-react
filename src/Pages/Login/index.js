@@ -7,6 +7,8 @@ const Login = (props) => {
     //Getting the props from routes
     const {user, email, setEmail, password, setPassword, rememberMe, setRM, handleLogin, hasAccount, setHasAccount, emailError, passwordError} = props;
 
+    
+
     //Restrict the page
     if(user){
         return <Redirect to="/"></Redirect>
@@ -56,7 +58,7 @@ const Login = (props) => {
                             <a  className="text-gray-500 font-semibold text-sm" >
                                 Lupa kata sandi?
                             </a>
-                            <NavLink to="#" className="text-red-400 font-semibold text-sm ml-2" >
+                            <NavLink to="/forgot-password" className="text-red-400 font-semibold text-sm ml-2" >
                                 Klik disini 
                             </NavLink>
                         </div>

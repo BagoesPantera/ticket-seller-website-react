@@ -5,6 +5,7 @@ import Navbar from '../../Navbar'
 import Navbarbl from '../../Navbar-before-login'
 import fire from '../../fire';
 import firebase from 'firebase';
+import ForgotPassword from '../../Pages/ForgotPassword'
 
 
 const Routes = () => {
@@ -17,6 +18,7 @@ const Routes = () => {
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
     const [hasAccount, setHasAccount] = useState(false);
+    const [ForgotpassError, setForgotpassError] = useState('');
   
     const clearInputs = () => {
         setUname('');
@@ -27,6 +29,7 @@ const Routes = () => {
     const clearErrors = () => {
       setEmailError('');
       setPasswordError('');
+      setForgotpassError('');
     }
     const handleLogin = () => {
         firebase.auth().setPersistence(rememberMe ? firebase.auth.Auth.Persistence.LOCAL : firebase.auth.Auth.Persistence.SESSION)
@@ -68,6 +71,8 @@ const Routes = () => {
         if (user) {
             <Redirect to="/"></Redirect>
             submitUser()
+            handleDisplayName()
+            handleEMailVerif()
         } else {
           handleLogin()
         }
@@ -84,6 +89,16 @@ const Routes = () => {
           }
       })
     }
+    const handleDisplayName = () => {
+        var dnAuth = fire.auth().currentUser;
+        dnAuth.updateProfile({
+            displayName : username
+        })
+    }
+    const handleEMailVerif = () => {
+        var Everifauth = fire.auth().currentUser;
+        Everifauth.sendEmailVerification()
+    }
     const submitUser = () => {
         const dataRef = firebase.database().ref('userData');
         const data = {
@@ -91,6 +106,13 @@ const Routes = () => {
             email,
         }
         dataRef.push(data);
+    }
+    const handleForgotPass= () => {
+        fire.auth().sendPasswordResetEmail(email).then(function() {
+            setForgotpassError("Reset Password telah di kirim via email")
+          }).catch(function(error) {
+            setForgotpassError(error.message)
+          });
     }
     const handleLogout = () => {
       fire.auth().signOut();
@@ -131,7 +153,10 @@ const Routes = () => {
                     <Schedule />
                 </Route>
                 <Route exact path="/login">
-                    <Login user={user} email={email} setEmail={setEmail} password={password} setPassword={setPassword} rememberMe={rememberMe} setRM={setRM} handleLogin={handleLogin} hasAccount={hasAccount} setHasAccount={setHasAccount} emailError={emailError} passwordError={passwordError} />
+                    <Login user={user} email={email} setEmail={setEmail} password={password} setPassword={setPassword} rememberMe={rememberMe} setRM={setRM} handleLogin={handleLogin} hasAccount={hasAccount} setHasAccount={setHasAccount} emailError={emailError} passwordError={passwordError}/>
+                </Route>
+                <Route exact path="/forgot-password">
+                    <ForgotPassword email={email} setEmail={setEmail} ForgotpassError={ForgotpassError} handleForgotPass={handleForgotPass}/>
                 </Route>
                 <Route exact path="/daftar">
                     <Register email={email} setEmail={setEmail} username={username} setUname={setUname} password={password} setPassword={setPassword} user={user} setUser={setUser}  handleRegister={handleRegister} submitUser={submitUser} hasAccount={hasAccount} setHasAccount={setHasAccount} emailError={emailError} passwordError={passwordError} handleconfirmPassword={handleconfirmPassword} confirmpass={confirmpass} setConfirmpass={setConfirmpass}/>
