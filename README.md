@@ -1,3 +1,3 @@
-## AKSport Project
+## Ticket Seller Website
 
 This Project made with [React](https://reactjs.org/) and Love ❤️.
