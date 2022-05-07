@@ -4,7 +4,10 @@ import { Booking, Home, Login, News, Register, Schedule } from '../../Pages'
 import Navbar from '../../Navbar'
 import Navbarbl from '../../Navbar-before-login'
 import fire from '../../fire';
-import firebase from 'firebase';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
+import 'firebase/compat/analytics';
 import ForgotPassword from '../../Pages/ForgotPassword'
 
 
